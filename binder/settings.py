@@ -186,3 +186,6 @@ except ImportError:
 # For NSD, a subdirectory under CREDS_DIR should be created with th e
 # appropriate certificates for nsd-control to execute.
 CREDS_DIR = "/creds"
+
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
