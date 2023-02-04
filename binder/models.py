@@ -167,7 +167,11 @@ class BindServer(models.Model):
                 # TODO: just return stats from get_stats call. This is probably not used
                 # anywhere else.
                 zone_data = bindreader.BindXmlReader(host=self.hostname, port=self.control_port)
-                zone_data.get_stats()
+
+                # Workaround to read  v3.13
+                zone_data.gather_xml()
+                zone_data.stats = bindreader.XmlV36(zone_data.bs_xml)
+
                 return zone_data
         elif self.server_type == "NSD":
                 zone_data = nsd.NSDServer(hostname=self.hostname,
