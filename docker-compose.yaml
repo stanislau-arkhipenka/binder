@@ -1,0 +1,37 @@
+services:
+  binder:
+    build: .
+    restart: always
+    ports:
+      - 8000:8000
+    depends_on:
+      - bind9
+    networks:
+      mydns:
+        ipv4_address: 10.5.0.5
+    environment:
+      # Use .env file to specify value for DJANGO_FERNET_KEY variable
+      - DJANGO_FERNET_KEY=${DJANGO_FERNET_KEY}
+
+  bind9:
+    image: ubuntu/bind9
+    ports:
+      - 53:53
+    environment:
+      - TZ=UTC
+      - BIND9_USER=bind
+    # volumes:
+      # - ./bind9/named.conf:/etc/bind/named.conf
+      # - ./bind9/records:/var/lib/bind
+      #- ./bind9/example.com.zone/etc/bind/example.com.zone
+    networks:
+      mydns:
+        ipv4_address: 10.5.0.6
+
+networks:
+  mydns:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.5.0.0/16
+         gateway: 10.5.0.1
