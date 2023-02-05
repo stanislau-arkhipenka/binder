@@ -5,4 +5,5 @@
 *.conf
 *~
 /binder/secret.txt
+/binder/fernet.txt
 /binder/local_settings.py
