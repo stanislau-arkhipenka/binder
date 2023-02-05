@@ -66,6 +66,8 @@ STATIC_URL= "/static/"
 SECRET_FILE = os.path.join(SITE_ROOT, 'secret.txt')
 try:
     SECRET_KEY = open(SECRET_FILE).read().strip()
+    if len(SECRET_KEY) == 0:
+        raise IOError
 except IOError:
     try:
         from random import choice
