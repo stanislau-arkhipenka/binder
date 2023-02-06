@@ -9,7 +9,8 @@ RUN apk add --no-cache nsd build-base python3-dev libffi-dev openssl-dev libc-de
   && pip install --upgrade pip \
   && pip install --no-cache-dir -r requirements.txt
 
-COPY . /code/
+COPY ./binder ./binder
+COPY ./manage.py ./manage.py
 
 EXPOSE 8000
 
