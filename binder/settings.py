@@ -187,7 +187,7 @@ FERNET_KEY=os.environ.get("DJANGO_FERNET_KEY", get_fernet())
 
 
 try:
-    from local_settings import *
+    from .local_settings import *
 except ImportError:
     pass
 
